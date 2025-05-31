@@ -333,7 +333,7 @@ with col_btn2:
             
             if title_input.strip() and not body_input.strip():
                 text_to_analyze = title_input
-                accuracy_hint = "정확도: 보통 (제목만 사용)"
+                accuracy_hint = "정확도: 낮음 (제목만 사용)"
             elif not title_input.strip() and body_input.strip():
                 text_to_analyze = body_input
                 accuracy_hint = "정확도: 보통 (본문만 사용)"
@@ -388,11 +388,11 @@ with col_btn2:
 
         # --- 결과 출력 ---
         st.markdown("---")
-        st.markdown("# 📊 판별 결과")
+        st.markdown("### 📊 판별 결과")
         
         # 결과 메시지를 강조하고 이모지로 시각화
         if predicted_label == 1: # 모델이 낚시성(1)으로 예측한 경우
-            st.markdown(f"# 🚨 이 뉴스는 **낚시성 뉴스**일 확률이 `{percent_clickbait}%` 입니다!")
+            st.markdown(f"## 🚨 이 뉴스는 **낚시성 뉴스**일 확률이 `{percent_clickbait}%` 입니다!")
             st.error("❗ **높은 확률로 독자의 클릭을 유도하는 요소를 포함하고 있습니다.**")
             if percent_clickbait > 70:
                 st.caption("주의! 자극적인 표현이나 과장된 내용이 있을 수 있습니다.")
