@@ -457,4 +457,5 @@ with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
 
 
 st.markdown("---")
+st.markdown("만족도 조사 : https://forms.gle/kn7hpCN1nixU4J599")
 st.markdown("문의 : JH.Moon213@gmail.com")
