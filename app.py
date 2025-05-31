@@ -162,15 +162,12 @@ def extract_info_from_url(url):
 
 # --- Streamlit 앱 UI ---
 st.header("📰 낚시성 뉴스 판별기")
-st.markdown(
-    """
-    <div style="justify-content: space-between; align-items: center;">
-        <span>뉴스 제목, 본문 또는 기사 링크를 입력하면 AI가 뉴스의 낚시성 정도를 분석해드립니다.</span>
-        <img src="https://i.imgur.com/VWthizR.png" width="70" style="margin-left: 30px;" />
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("""
+    뉴스 제목, 본문 또는 기사 링크를 입력하면
+    AI가 뉴스의 낚시성 정도를 분석해드립니다.
+
+    
+""")
 
 st.markdown("---") # 여기에 첫 번째 구분선이 있습니다.
 
@@ -258,7 +255,15 @@ with st.sidebar:
     본 사이트는 과학기술정보통신부의 재원으로 한국지능정보사회진흥원의 지원을 받아 구축된 "낚시성 기사 탐지 데이터"을 활용하여 제작되었습니다. 본 사이트에 활용된 데이터는 AI 허브에서 다운로드 받으실 수 있습니다.
     """)
     st.caption(" **문의** : JH.Moon213@gmail.com")
-    
+    st.markdown(
+    """
+    <img src="https://i.imgur.com/VWthizR.png" width="60">
+    """,
+    unsafe_allow_html=True
+    )
+
+   
+
 # 🎣 사이드바 추가 END
 
 # 📍 메인 콘텐츠 영역 START
