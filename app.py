@@ -384,56 +384,52 @@ with col_btn2:
             st.warning("분석할 텍스트를 준비하는 데 실패했습니다. 다시 시도해주세요.")
             st.stop()
 
-        # --- 모델 예측 ---
-        with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
-            X_vec = vectorizer.transform([text_to_analyze])
-            
-            probabilities = model.predict_proba(X_vec)[0]
-            
-            try:
-                clickbait_class_index = list(model.classes_).index(1) # 1이 낚시성이라는 전제
-                prob_clickbait = probabilities[clickbait_class_index]
-                percent_clickbait = round(prob_clickbait * 100, 2)
-            except ValueError:
-                st.error("오류: 모델 클래스에 낚시성/정상 라벨(0 또는 1)이 정의되어 있지 않습니다. 모델 학습을 확인하세요.")
-                st.stop()
+# --- 모델 예측 ---
+with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
+    X_vec = vectorizer.transform([text_to_analyze])
+    
+    probabilities = model.predict_proba(X_vec)[0]
+    
+    try:
+        clickbait_class_index = list(model.classes_).index(1)
+        prob_clickbait = probabilities[clickbait_class_index]
+        percent_clickbait = round(prob_clickbait * 100, 2)
+    except ValueError:
+        st.error("오류: 모델 클래스에 낚시성/정상 라벨(0 또는 1)이 정의되어 있지 않습니다. 모델 학습을 확인하세요.")
+        st.stop()
 
-            predicted_label = model.predict(X_vec)[0]
+    predicted_label = model.predict(X_vec)[0]
 
-# --- 결과 출력 ---
-st.markdown("---")
-st.subheader("📊 판별 결과")
-st.markdown("<br>", unsafe_allow_html=True)
-
-if percent_clickbait > 60:
-    st.markdown(
-        f"<p style='font-size:17px;'>🚨 이 기사는 <strong>낚시성 뉴스</strong>일 확률이 <strong>{percent_clickbait}%</strong> 입니다!</p>",
-        unsafe_allow_html=True
-    )
+    # ✅ 이 안쪽에서 percent_clickbait 사용 가능!
+    st.markdown("---")
+    st.subheader("📊 판별 결과")
     st.markdown("<br>", unsafe_allow_html=True)
-    st.error("❗ **높은 확률로 독자의 클릭을 유도하는 요소를 포함하고 있습니다.**")
-    
-    if percent_clickbait > 80:
-        st.caption("주의! 자극적인 표현이나 과장된 내용이 많을 수 있습니다.")
-    elif percent_clickbait > 70:
-        st.caption("낚시성 가능성이 높은 기사입니다. 내용을 주의 깊게 확인해보세요.")
-    else:
-        st.caption("낚시성으로 분류되었으나 확률은 중간 정도입니다.")
-        
-else:
-    st.markdown(
-        f"## ✅ 이 기사는 **정상 뉴스**일 확률이 `{100 - percent_clickbait}%` 입니다.",
-        unsafe_allow_html=True
-    )
-    st.success("👍 **낚시성 특징이 거의 없는 일반적인 뉴스입니다.**")
-    
-    if percent_clickbait < 30:
-        st.caption("안심하고 읽으셔도 좋습니다.")
-    elif percent_clickbait <= 60:
-        st.caption("정상 뉴스로 분류되었지만, 다소 자극적인 표현이 포함될 수도 있습니다.")
 
-# 정확도 정보 출력
-st.info(accuracy_hint)
+    if percent_clickbait > 60:
+        st.markdown(
+            f"<p style='font-size:17px;'>🚨 이 기사는 <strong>낚시성 뉴스</strong>일 확률이 <strong>{percent_clickbait}%</strong> 입니다!</p>",
+            unsafe_allow_html=True
+        )
+        st.error("❗ **높은 확률로 독자의 클릭을 유도하는 요소를 포함하고 있습니다.**")
+        if percent_clickbait > 80:
+            st.caption("주의! 자극적인 표현이나 과장된 내용이 많을 수 있습니다.")
+        elif percent_clickbait > 70:
+            st.caption("낚시성 가능성이 높은 기사입니다. 내용을 주의 깊게 확인해보세요.")
+        else:
+            st.caption("낚시성으로 분류되었으나 확률은 중간 정도입니다.")
+    else:
+        st.markdown(
+            f"## ✅ 이 기사는 **정상 뉴스**일 확률이 `{100 - percent_clickbait}%` 입니다.",
+            unsafe_allow_html=True
+        )
+        st.success("👍 **낚시성 특징이 거의 없는 일반적인 뉴스입니다.**")
+        if percent_clickbait < 30:
+            st.caption("안심하고 읽으셔도 좋습니다.")
+        elif percent_clickbait <= 60:
+            st.caption("정상 뉴스로 분류되었지만, 다소 자극적인 표현이 포함될 수도 있습니다.")
+
+    st.info(accuracy_hint)
+
 
 st.markdown("---")
 st.markdown("문의 : JH.Moon213@gmail.com")
