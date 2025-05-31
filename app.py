@@ -161,7 +161,7 @@ def extract_info_from_url(url):
 
 
 # --- Streamlit 앱 UI ---
-st.header("📰 낚1시성 뉴스 판별기")
+st.header("📰 낚시성 뉴스 판별기")
 st.markdown("""
     뉴스 제목, 본문 또는 기사 링크를 입력하면
     AI가 뉴스의 낚시성 정도를 분석해드립니다.
@@ -418,4 +418,16 @@ with col_btn2:
         st.info(accuracy_hint) # 정확도 힌트도 여기에 표시
 
 st.markdown("---")
+
+
+st.markdown(
+    """
+    <div style="display: flex; align-items: center;">
+        <span>문의 : JH.Moon213@gmail.com</span>
+        <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" 
+             width="18" style="margin-left: 10px;" />
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
