@@ -228,10 +228,17 @@ h2 {
 
 # 🎣 사이드바 추가 START
 with st.sidebar:
-    st.header("⚙️ 앱 정보 및 설정")
+    st.header("⚙️ 사이트 정보")
     st.write("이 앱은 뉴스 기사의 낚시성 여부를 텍스트 분석을 통해 판별합니다.")
-    st.write("**개발자:** [귀하의 이름 또는 닉네임]") # 여기에 귀하의 정보 추가
+    st.write("**개발자:** GOMHAN") # 여기에 귀하의 정보 추가
     st.write("**버전:** 1.0.1")
+    st.markdown("---")
+    st.subheader("✔️추천 검사 방식")
+      st.write("""**다음 순서에 따라 검사 정확도가 달라집니다**
+      1. 뉴스 기사 링크 입력
+      2. 제목 + 본문 입력
+      3. 제목만 입력력
+    """)
     st.markdown("---")
     st.subheader("❓ 사용법")
     st.write("""
@@ -240,7 +247,7 @@ with st.sidebar:
     3.  **'판별하기' 버튼 클릭:** 모델이 입력된 내용을 분석하고 결과를 보여줍니다.
     """)
     st.markdown("---")
-    st.caption("궁금한 점이 있다면 언제든지 질문해주세요!")
+    st.caption("**ansdml:** jh.moon213@gmail.com")
 # 🎣 사이드바 추가 END
 
 # 📍 메인 콘텐츠 영역 START
