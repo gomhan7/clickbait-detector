@@ -401,32 +401,39 @@ with col_btn2:
             predicted_label = model.predict(X_vec)[0]
 
         # --- 결과 출력 ---
-        st.markdown("---")
-        st.subheader("📊 판별 결과" )
-        st.markdown("<br>", unsafe_allow_html=True)
-        # 결과 메시지를 강조하고 이모지로 시각화
-        if predicted_label == 1: # 모델이 낚시성(1)으로 예측한 경우
-            st.markdown(
-            f"<p style='font-size:17px;'>🚨 이 기사는 <strong>낚시성 뉴스</strong>일 확률이 <strong>{percent_clickbait}%</strong> 입니다!</p>",
-            unsafe_allow_html=True
-            )
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.error("❗ **높은 확률로 독자의 클릭을 유도하는 요소를 포함하고 있습니다.**")
-            if percent_clickbait > 70:
-                st.caption("주의! 자극적인 표현이나 과장된 내용이 있을 수 있습니다.")
-            else:
-                st.caption("낚시성으로 예측되었으나 확률은 다소 낮습니다. (모델의 판단)")
-        elif predicted_label == 0: # 모델이 정상(0)으로 예측한 경우
-            st.markdown(f"## ✅ 이 기사는 **정상 뉴스**일 확률이 `{100 - percent_clickbait}%` 입니다.")
-            st.success("👍 **낚시성 특징이 거의 없는 일반적인 뉴스입니다.**")
-            if percent_clickbait < 30:
-                 st.caption("안심하고 읽으셔도 좋습니다.")
-            else:
-                st.caption("낚시성으로 예측되지 않았지만, 확률이 애매할 수 있습니다. (판단 기준: 낚시성 확률 40% 이하)")
-        else:
-            st.warning(f"알 수 없는 라벨 값({predicted_label})이 예측되었습니다. 데이터 라벨링을 확인하세요.")
+st.markdown("---")
+st.subheader("📊 판별 결과")
+st.markdown("<br>", unsafe_allow_html=True)
+
+if percent_clickbait > 60:
+    st.markdown(
+        f"<p style='font-size:17px;'>🚨 이 기사는 <strong>낚시성 뉴스</strong>일 확률이 <strong>{percent_clickbait}%</strong> 입니다!</p>",
+        unsafe_allow_html=True
+    )
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.error("❗ **높은 확률로 독자의 클릭을 유도하는 요소를 포함하고 있습니다.**")
+    
+    if percent_clickbait > 80:
+        st.caption("주의! 자극적인 표현이나 과장된 내용이 많을 수 있습니다.")
+    elif percent_clickbait > 70:
+        st.caption("낚시성 가능성이 높은 기사입니다. 내용을 주의 깊게 확인해보세요.")
+    else:
+        st.caption("낚시성으로 분류되었으나 확률은 중간 정도입니다.")
         
-        st.info(accuracy_hint) # 정확도 힌트도 여기에 표시
+else:
+    st.markdown(
+        f"## ✅ 이 기사는 **정상 뉴스**일 확률이 `{100 - percent_clickbait}%` 입니다.",
+        unsafe_allow_html=True
+    )
+    st.success("👍 **낚시성 특징이 거의 없는 일반적인 뉴스입니다.**")
+    
+    if percent_clickbait < 30:
+        st.caption("안심하고 읽으셔도 좋습니다.")
+    elif percent_clickbait <= 60:
+        st.caption("정상 뉴스로 분류되었지만, 다소 자극적인 표현이 포함될 수도 있습니다.")
+
+# 정확도 정보 출력
+st.info(accuracy_hint)
 
 st.markdown("---")
 st.markdown("문의 : JH.Moon213@gmail.com")
