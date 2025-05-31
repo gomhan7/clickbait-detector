@@ -232,7 +232,7 @@ h2 {
 # 🎣 사이드바 추가 START
 with st.sidebar:
     st.header("⚙️ 사이트 정보")
-    st.write("이 앱은 뉴스 기사의 낚시성 여부를 텍스트 분석을 통해 판별합니다.")
+    st.write("이 사이트는 뉴스 기사의 낚시성 여부를 텍스트 분석을 통해 판별합니다.")
     st.write("**개발자:** GOMHAN") # 여기에 귀하의 정보 추가
     st.write("**버전:** 1.0.1")
     st.markdown("---")
