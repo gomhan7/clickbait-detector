@@ -13,7 +13,22 @@ VEC_PATH = "tfidf_vectorizer.pkl"
 st.set_page_config(page_title="낚시성 뉴스 판별기", page_icon="🎣", layout="centered")
 
 
+#이미지
+st.markdown(
+    """
+    <style>
+    .header-img {
+        width: 100%;
+        max-height: 120px;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+    </style>
 
+    <img class="header-img" src="logo.png">
+    """,
+    unsafe_allow_html=True
+)
 
 # --- 모델 및 벡터라이저 로딩 ---
 @st.cache_resource
