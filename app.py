@@ -206,7 +206,7 @@ div.stRadio > label.st-selected > div > p {
 
 /* 선택 방식 라디오 버튼의 텍스트 크기 (필요 시) */
 div.stRadio > label > div > p {
-    font-size: 1.5em;
+    font-size: 3em;
 } */
 
 
