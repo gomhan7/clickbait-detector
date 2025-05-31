@@ -162,12 +162,16 @@ def extract_info_from_url(url):
 
 # --- Streamlit 앱 UI ---
 st.header("📰 낚시성 뉴스 판별기")
-st.markdown("""
-    뉴스 제목, 본문 또는 기사 링크를 입력하면
-    AI가 뉴스의 낚시성 정도를 분석해드립니다.
+st.markdown(
+    """
+    <div>
+        <span>뉴스 제목, 본문 또는 기사 링크를 입력하면 AI가 뉴스의 낚시성 정도를 분석해드립니다.</span>
+        <img src="https://i.imgur.com/abc123.png" width="20" style="float: right;" />
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
-    
-""")
 st.markdown("---") # 여기에 첫 번째 구분선이 있습니다.
 
 # 🎨 커스텀 CSS 주입 START
@@ -425,7 +429,7 @@ st.markdown(
     <div style="display: flex; align-items: center;">
         <span></span>
         <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" 
-             width="18" style="margin-left: 10px;" /> 문의 : JH.Moon213@gmail.com           <img src="https://i.imgur.com/VWthizR.png" width="40" style="margin-left: 30px;" />
+             width="18" style="margin-left: 10px;" /> 문의 : JH.Moon213@gmail.com>
     </div>
     """,
     unsafe_allow_html=True
