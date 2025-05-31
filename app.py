@@ -247,7 +247,7 @@ with st.sidebar:
     3.  **'판별하기' 버튼 클릭:** 모델이 입력된 내용을 분석하고 결과를 보여줍니다.
     """)
     st.markdown("---")
-    st.caption("**ansdml:** jh.moon213@gmail.com")
+    st.caption("**문의** : JH.Moon213@gmail.com")
 # 🎣 사이드바 추가 END
 
 # 📍 메인 콘텐츠 영역 START
