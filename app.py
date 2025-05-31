@@ -35,6 +35,14 @@ def load_model_and_vectorizer():
 # 앱 시작 시 모델과 벡터라이저를 로드합니다.
 model, vectorizer = load_model_and_vectorizer()
 
+# 🔄 Google 뉴스 등의 리디렉션 URL을 실제 뉴스 URL로 변환하는 함수
+def resolve_redirect_url(url):
+    try:
+        response = requests.get(url, allow_redirects=True, timeout=5)
+        return response.url
+    except Exception as e:
+        return None
+    
 # --- 뉴스 링크에서 제목/본문/출처 추출 함수 ---
 def extract_info_from_url(url):
     """
@@ -357,6 +365,16 @@ with col_btn2:
             if not link_input.strip():
                 st.warning("뉴스 기사 링크를 입력해주세요. 비어있습니다.")
                 st.stop()
+            
+                # 🔄 Google 뉴스 링크일 경우 실제 뉴스 URL로 변환 시도
+            if "news.google.com" in link_input:
+                resolved_url = resolve_redirect_url(link_input)
+                if resolved_url:
+                    st.info(f"🔄 Google 뉴스 링크가 실제 뉴스 링크로 변환되었습니다:\n\n{resolved_url}")
+                    link_input = resolved_url
+                else:
+                    st.error("❌ Google 뉴스 링크의 실제 뉴스 주소를 가져오지 못했습니다. 직접 뉴스 링크를 입력해주세요.")
+                    st.stop()
             
             with st.spinner('🔗 링크에서 뉴스 정보 추출 중... (최대 10초)'):
                 title_extracted, body_extracted, source_extracted = extract_info_from_url(link_input)
