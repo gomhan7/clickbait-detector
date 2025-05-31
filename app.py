@@ -388,18 +388,18 @@ with col_btn2:
 
         # --- 결과 출력 ---
         st.markdown("---")
-        st.header("### 📊 판별 결과")
+        st.markdown("### 📊 판별 결과")
         
         # 결과 메시지를 강조하고 이모지로 시각화
         if predicted_label == 1: # 모델이 낚시성(1)으로 예측한 경우
-            st.header(f"## 🚨 이 뉴스는 **낚시성 뉴스**일 확률이 `{percent_clickbait}%` 입니다!")
+            st.markdown(f"## 🚨 이 뉴스는 **낚시성 뉴스**일 확률이 `{percent_clickbait}%` 입니다!")
             st.error("❗ **높은 확률로 독자의 클릭을 유도하는 요소를 포함하고 있습니다.**")
             if percent_clickbait > 70:
                 st.caption("주의! 자극적인 표현이나 과장된 내용이 있을 수 있습니다.")
             else:
                 st.caption("낚시성으로 예측되었으나 확률은 다소 낮습니다. (모델의 판단)")
         elif predicted_label == 0: # 모델이 정상(0)으로 예측한 경우
-            st.header(f"## ✅ 이 뉴스는 **정상 뉴스**일 확률이 `{100 - percent_clickbait}%` 입니다.")
+            st.markdown(f"## ✅ 이 뉴스는 **정상 뉴스**일 확률이 `{100 - percent_clickbait}%` 입니다.")
             st.success("👍 **낚시성 특징이 거의 없는 일반적인 뉴스입니다.**")
             if percent_clickbait < 30:
                  st.caption("안심하고 읽으셔도 좋습니다.")
