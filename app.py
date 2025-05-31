@@ -205,14 +205,14 @@ div.stRadio > label.st-selected > div > p {
 }
 
 /* 선택 방식 라디오 버튼의 텍스트 크기 (필요 시) */
-/* div.stRadio > label > div > p {
-    font-size: 1.1em;
+div.stRadio > label > div > p {
+    font-size: 1.5em;
 } */
 
 
 /* 다른 입력 필드 텍스트 크기 (선택 사항) */
 /* .stTextArea textarea, .stTextInput input {
-    font-size: 1.1em;
+    font-size: 1.5em;
 } */
 
 /* 섹션 제목(subheader) 색상 변경 (선택 사항) */
