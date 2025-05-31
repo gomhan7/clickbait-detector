@@ -393,7 +393,9 @@ with col_btn2:
         # 결과 메시지를 강조하고 이모지로 시각화
         if predicted_label == 1: # 모델이 낚시성(1)으로 예측한 경우
             st.markdown(
-            f"<p style='font-size:18px;'>🚨 이 뉴스는 **낚시성 뉴스**일 확률이 `{percent_clickbait}%` 입니다! )   
+            f"<p style='font-size:18px;'>🚨 이 뉴스는 <strong>낚시성 뉴스</strong>일 확률이 <strong>{percent_clickbait}%</strong> 입니다!</p>",
+            unsafe_allow_html=True
+            )
             st.error("❗ **높은 확률로 독자의 클릭을 유도하는 요소를 포함하고 있습니다.**")
             if percent_clickbait > 70:
                 st.caption("주의! 자극적인 표현이나 과장된 내용이 있을 수 있습니다.")
