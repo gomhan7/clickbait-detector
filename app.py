@@ -258,7 +258,7 @@ with st.sidebar:
     """
     <div style="display: flex; justify-content: space-between; align-items: center;">
         <span>문의 : JH.Moon213@gmail.com</span>
-        <img src="https://i.imgur.com/abc123.png" width="40" style="margin-left: 10px;" />
+        <img src="https://i.imgur.com/VWthizR.png" width="40" style="margin-left: 10px;" />
     </div>
     """,
     unsafe_allow_html=True
