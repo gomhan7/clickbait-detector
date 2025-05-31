@@ -388,7 +388,7 @@ with col_btn2:
 
         # --- 결과 출력 ---
         st.markdown("---")
-        st.markdown( f"<p style='font-size:18px;'>📊 판별 결과" )
+        st.header("📊 판별 결과" )
         
         # 결과 메시지를 강조하고 이모지로 시각화
         if predicted_label == 1: # 모델이 낚시성(1)으로 예측한 경우
