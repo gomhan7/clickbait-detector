@@ -246,9 +246,9 @@ with st.sidebar:
     st.markdown("---")
     st.subheader("❓ 사용법")
     st.write("""
-    1.  **검사 방식 선택:** 제목만 입력, 제목+본문 입력, 링크 입력 중 하나를 선택합니다.
+    1.  **검사 방식 선택:** 제목만 입력, 제목+본문 입력, 링크 입력 중 하나를 선택하세요.
     2.  **내용 입력:** 선택한 방식에 맞게 텍스트나 링크를 입력합니다.
-    3.  **'판별하기' 버튼 클릭:** AI모델이 입력된 내용을 분석하고 결과를 보여줍니다.
+    3.  **'판별하기' 버튼 클릭:** 모델이 입력된 내용을 분석하고 결과를 보여줍니다.
     """)
     st.markdown("---")
     st.caption("""
@@ -332,6 +332,8 @@ with col_btn2:
     if st.button("✨ 판별하기 ✨", key="predict_button", use_container_width=True, type="primary"):
         # `type="primary"`를 사용하면 `config.toml`의 `primaryColor`를 따릅니다.
         # `config.toml`로 색상을 변경했으므로, CSS에서는 크기, 그림자 등만 제어하면 됩니다.
+        text_to_analyze = ""
+        accuracy_hint = ""
         
         # 입력값 검증 및 분석할 텍스트 준비
         if check_method == "① 제목만 입력":
@@ -400,10 +402,10 @@ with col_btn2:
                 else:
                     st.warning("⚠️ 본문 추출에 실패했습니다. 제목과 출처 정보만으로 분석합니다.")
 
-        # 최종 분석할 텍스트가 비어있다면 오류 처리
-        if not text_to_analyze.strip():
-            st.warning("분석할 텍스트를 준비하는 데 실패했습니다. 다시 시도해주세요.")
-            st.stop()
+            # 최종 분석할 텍스트가 비어있다면 오류 처리
+            if not text_to_analyze.strip():
+                st.warning("분석할 텍스트를 준비하는 데 실패했습니다. 다시 시도해주세요.")
+                st.stop()
 
 # --- 모델 예측 ---
 with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
