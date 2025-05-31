@@ -4,6 +4,14 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+
+hide_footer_style = """
+    <style>
+    footer {visibility: hidden;}
+    </style>
+"""
+st.markdown(hide_footer_style, unsafe_allow_html=True)
+
 # --- 설정 ---
 # 모델 및 벡터라이저 파일 경로 정의 (실제 경로에 맞게 수정해주세요)
 MODEL_PATH = "clickbait_model.pkl"
@@ -238,7 +246,7 @@ with st.sidebar:
     **다음 순서에 따라 검사 정확도가 달라집니다**
     1. 뉴스 기사 링크 입력
     2. 제목 + 본문 입력
-    3. 제목만 입력력
+    3. 제목만 입력
     """)
     st.markdown("---")
     st.subheader("❓ 사용법")
