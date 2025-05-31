@@ -12,6 +12,22 @@ VEC_PATH = "tfidf_vectorizer.pkl"
 # --- Streamlit 페이지 설정 (스크립트의 첫 번째 Streamlit 명령이어야 함!) ---
 st.set_page_config(page_title="낚시성 뉴스 판별기", page_icon="🎣", layout="centered")
 
+#이미지
+st.markdown(
+    """
+    <style>
+    .header-img {
+        width: 100%;
+        max-height: 120px;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+    </style>
+
+    <img class="header-img" src="logo.png">
+    """,
+    unsafe_allow_html=True
+)
 
 # --- 모델 및 벡터라이저 로딩 ---
 @st.cache_resource
@@ -423,9 +439,9 @@ st.markdown("---")
 st.markdown(
     """
     <div style="display: flex; align-items: center;">
-        <span>문의 : JH.Moon213@gmail.com</span>
+        <span>문의 : </span>
         <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" 
-             width="18" style="margin-left: 10px;" />
+             width="18" style="margin-left: 10px;" /> JH.Moon213@gmail.com
     </div>
     """,
     unsafe_allow_html=True
