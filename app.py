@@ -422,7 +422,8 @@ st.markdown("---")
 st.markdown(
     """
     <p>
-    문의 : JH.Moon213@gmail.com        <img src="logo.png" width="18" style="vertical-align: middle; margin-left:10px;">
+    문의 : JH.Moon213@gmail.com
+    <img src="logo.png" width="18" style="vertical-align: middle; margin-left:10px;">
     </p>
     """,
     unsafe_allow_html=True
