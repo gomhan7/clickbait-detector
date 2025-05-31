@@ -3,6 +3,7 @@ import joblib
 import requests
 from bs4 import BeautifulSoup
 import re
+import urllib.parse
 
 # --- 설정 ---
 # 모델 및 벡터라이저 파일 경로 정의 (실제 경로에 맞게 수정해주세요)
@@ -35,13 +36,23 @@ def load_model_and_vectorizer():
 # 앱 시작 시 모델과 벡터라이저를 로드합니다.
 model, vectorizer = load_model_and_vectorizer()
 
-# 🔄 Google 뉴스 등의 리디렉션 URL을 실제 뉴스 URL로 변환하는 함수
+# 구글 뉴스 변환
 def resolve_redirect_url(url):
-    try:
-        response = requests.get(url, allow_redirects=True, timeout=5)
-        return response.url
-    except Exception as e:
-        return None
+    parsed = urllib.parse.urlparse(url)
+    query_params = urllib.parse.parse_qs(parsed.query)
+
+    for param in ['url', 'q']:
+        if param in query_params:
+            return query_params[param][0]
+
+    if "/articles/" in url:
+        decoded = urllib.parse.unquote(url)
+        matches = re.findall(r"https?://[^\s]+", decoded)
+        for match in matches:
+            if "google.com" not in match:
+                return match
+
+    return None
     
 # --- 뉴스 링크에서 제목/본문/출처 추출 함수 ---
 def extract_info_from_url(url):
@@ -375,6 +386,8 @@ with col_btn2:
                 else:
                     st.error("❌ Google 뉴스 링크의 실제 뉴스 주소를 가져오지 못했습니다. 직접 뉴스 링크를 입력해주세요.")
                     st.stop()
+
+
             
             with st.spinner('🔗 링크에서 뉴스 정보 추출 중... (최대 10초)'):
                 title_extracted, body_extracted, source_extracted = extract_info_from_url(link_input)
