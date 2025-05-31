@@ -164,7 +164,7 @@ def extract_info_from_url(url):
 st.header("📰 낚시성 뉴스 판별기")
 st.markdown("""
     뉴스 제목, 본문 또는 기사 링크를 입력하면
-    AI가 뉴스의 낚시성 정도를 분석해드립니다.
+    자체 학습한 AI가 뉴스의 낚시성 정도를 분석해드립니다.
 
     
 """)
