@@ -425,7 +425,7 @@ st.markdown(
     <div style="display: flex; align-items: center;">
         <span></span>
         <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" 
-             width="18" style="margin-left: 10px;" /> 문의 : JH.Moon213@gmail.com           <img src="https://i.imgur.com/VWthizR.png" width="40" style="margin-left: 100px;" />
+             width="18" style="margin-left: 10px;" /> 문의 : JH.Moon213@gmail.com           <img src="https://i.imgur.com/VWthizR.png" width="40" style="margin-left: 10px;" />
     </div>
     """,
     unsafe_allow_html=True
