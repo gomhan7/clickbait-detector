@@ -418,11 +418,12 @@ with col_btn2:
         st.info(accuracy_hint) # 정확도 힌트도 여기에 표시
 
 st.markdown("---")
-st.markdown("문의 : JH.Moon213@gmail.com")
+
 st.markdown(
     """
-    <p>문의 : JH.Moon213@gmail.com           <img src="logo.png" 
-    width="18" style="vertical-align: middle;"> contact@example.com</p>
+    <p>
+    문의 : JH.Moon213@gmail.com        <img src="logo.png" width="18" style="vertical-align: middle; margin-left:10px;">
+    </p>
     """,
     unsafe_allow_html=True
 )
