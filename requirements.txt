@@ -1,5 +1,6 @@
 streamlit
 scikit-learn
-joblib
 pandas
 numpy
+beautifulsoup4
+lxml
