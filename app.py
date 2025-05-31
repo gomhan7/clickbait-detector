@@ -38,20 +38,32 @@ model, vectorizer = load_model_and_vectorizer()
 
 # 구글 뉴스 변환
 def resolve_redirect_url(url):
-    parsed = urllib.parse.urlparse(url)
-    query_params = urllib.parse.parse_qs(parsed.query)
+    try:
+        # 구글 뉴스 URL이라면 직접 HTML 요청해서 meta-refresh 태그 분석
+        headers = {
+            "User-Agent": "Mozilla/5.0"
+        }
+        response = requests.get(url, headers=headers, timeout=10)
+        soup = BeautifulSoup(response.text, "html.parser")
 
-    for param in ['url', 'q']:
-        if param in query_params:
-            return query_params[param][0]
+        # 1. meta refresh 방식 리디렉션 추출
+        meta = soup.find("meta", attrs={"http-equiv": "refresh"})
+        if meta:
+            content = meta.get("content")
+            if "url=" in content.lower():
+                real_url = content.split("url=")[-1]
+                return real_url.strip()
 
-    if "/articles/" in url:
-        decoded = urllib.parse.unquote(url)
-        matches = re.findall(r"https?://[^\s]+", decoded)
-        for match in matches:
-            if "google.com" not in match:
-                return match
+        # 2. fallback: HTML 내 링크 직접 추출
+        links = soup.find_all("a", href=True)
+        for a in links:
+            href = a["href"]
+            if href.startswith("https://") and "google.com" not in href:
+                return href
 
+    except Exception as e:
+        print(f"🔧 리디렉션 URL 파싱 실패: {e}")
+    
     return None
     
 # --- 뉴스 링크에서 제목/본문/출처 추출 함수 ---
@@ -386,6 +398,7 @@ with col_btn2:
                 else:
                     st.error("❌ Google 뉴스 링크의 실제 뉴스 주소를 가져오지 못했습니다. 직접 뉴스 링크를 입력해주세요.")
                     st.stop()
+
 
 
             
