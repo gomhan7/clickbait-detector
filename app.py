@@ -36,38 +36,6 @@ def load_model_and_vectorizer():
 # 앱 시작 시 모델과 벡터라이저를 로드합니다.
 model, vectorizer = load_model_and_vectorizer()
 
-# 구글 뉴스 변환
-import requests
-from bs4 import BeautifulSoup
-
-def resolve_redirect_url(google_news_url):
-    try:
-        headers = {
-            "User-Agent": "Mozilla/5.0"
-        }
-        response = requests.get(google_news_url, headers=headers, timeout=10)
-        response.raise_for_status()
-        
-        # HTML 파싱
-        soup = BeautifulSoup(response.text, "html.parser")
-
-        # 1. meta refresh 태그로 리디렉션 확인
-        meta = soup.find("meta", attrs={"http-equiv": "refresh"})
-        if meta and "url=" in meta.get("content", "").lower():
-            redirect_url = meta["content"].split("url=")[-1].strip()
-            return redirect_url
-
-        # 2. HTML 내 <a href> 중 외부 뉴스 링크 추출 (예비 방법)
-        for a in soup.find_all("a", href=True):
-            href = a["href"]
-            if href.startswith("http") and "google.com" not in href:
-                return href
-
-        return None
-
-    except Exception as e:
-        print(f"[에러] 리디렉션 파싱 실패: {e}")
-        return None
     
 # --- 뉴스 링크에서 제목/본문/출처 추출 함수 ---
 def extract_info_from_url(url):
@@ -391,20 +359,12 @@ with col_btn2:
             if not link_input.strip():
                 st.warning("뉴스 기사 링크를 입력해주세요. 비어있습니다.")
                 st.stop()
-            # 구글글
+            # 구글
             
-            if "news.google.com" in link_input:
-                resolved_url = resolve_redirect_url(link_input)
-                if resolved_url:
-                    st.info(f"🔄 Google 뉴스 링크가 실제 뉴스 링크로 변환되었습니다:\n\n{resolved_url}")
-                    link_input = resolved_url  # 변환된 실제 뉴스 URL로 교체
-                else:
-                    st.error("❌ Google 뉴스 링크의 실제 뉴스 주소를 가져오지 못했습니다. 직접 뉴스 링크를 입력해주세요.")
-                    st.stop()
-
-
-
-
+            if "google.com" in link_input and ("read" in link_input or "/amp/" in link_input):
+                st.warning("❌ Google 뉴스 링크는 외부 기사의 중간 매개체 역할을 하므로 실제 뉴스 내용을 직접 가져올 수 없습니다.")
+                st.info("🔗 아래 방법을 따라주세요:\n1. Google 뉴스 링크를 인터넷에서 직접들어간다.\n2. 상단 주소창에 표시된 **실제 뉴스 기사 링크**를 복사한다.\n3. 복사한 링크를 다시 이곳에 붙여넣는다.")
+                st.stop()
             
             with st.spinner('🔗 링크에서 뉴스 정보 추출 중... (최대 10초)'):
                 title_extracted, body_extracted, source_extracted = extract_info_from_url(link_input)
