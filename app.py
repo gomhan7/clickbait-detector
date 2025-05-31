@@ -166,7 +166,7 @@ st.markdown(
     """
     <div style="justify-content: space-between; align-items: center;">
         <span>뉴스 제목, 본문 또는 기사 링크를 입력하면 AI가 뉴스의 낚시성 정도를 분석해드립니다.</span>
-        <img src="https://i.imgur.com/VWthizR.png" width="40" style="margin-left: 10px;" />
+        <img src="https://i.imgur.com/VWthizR.png" width="70" style="margin-left: 30px;" />
     </div>
     """,
     unsafe_allow_html=True
