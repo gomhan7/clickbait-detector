@@ -423,7 +423,8 @@ st.markdown(
     """
     <p>
     문의 : JH.Moon213@gmail.com
-    <img src="logo.png" width="18" style="vertical-align: middle; margin-left:10px;">
+    <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" width="18" 
+    style="vertical-align: middle; margin-left: 10px;">
     </p>
     """,
     unsafe_allow_html=True
