@@ -267,6 +267,7 @@ with col1: # 첫 번째 컬럼에 검사 방식 선택 배치
         index=0, # 기본값은 "제목만 입력"
         key="check_method_radio"
     )
+    st.markdown("<br><br>", unsafe_allow_html=True)
 
 with col2: # 두 번째 컬럼에 입력 필드 배치
     st.subheader("② 정보 입력")
@@ -389,7 +390,7 @@ with col_btn2:
         # --- 결과 출력 ---
         st.markdown("---")
         st.subheader("📊 판별 결과" )
-        
+        st.markdown("<br><br>", unsafe_allow_html=True)
         # 결과 메시지를 강조하고 이모지로 시각화
         if predicted_label == 1: # 모델이 낚시성(1)으로 예측한 경우
             st.markdown(
