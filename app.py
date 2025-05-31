@@ -28,14 +28,29 @@ def load_model_and_vectorizer():
         st.error(f"오류: 필수 파일이 없습니다. 다음 경로를 확인해주세요:")
         st.error(f"- 모델 파일: `{MODEL_PATH}`")
         st.error(f"- 벡터라이저 파일: `{VEC_PATH}`")
+        render_footer()
         st.stop()
+        
     except Exception as e:
         st.error(f"모델 로드 중 예기치 않은 오류가 발생했습니다: {e}")
+        render_footer()
         st.stop()
 
 # 앱 시작 시 모델과 벡터라이저를 로드합니다.
 model, vectorizer = load_model_and_vectorizer()
 
+# 하단 안내를 함수로 분리
+def render_footer():
+    st.markdown("---")
+    st.markdown(
+        """
+        <div style='text-align: center; font-size: 0.9em; color: gray;'>
+            📝 만족도 조사 : <a href='https://forms.gle/kn7hpCN1nixU4J599' target='_blank'>https://forms.gle/kn7hpCN1nixU4J599</a><br>
+            📧 문의 : JH.Moon213@gmail.com
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     
 # --- 뉴스 링크에서 제목/본문/출처 추출 함수 ---
 def extract_info_from_url(url):
@@ -456,14 +471,4 @@ with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
     st.info(accuracy_hint)
 
 
-st.markdown("---")
-st.markdown("---")
-st.markdown(
-    """
-    <div style='text-align: center; font-size: 0.9em; color: gray;'>
-        📝 만족도 조사 : <a href='https://forms.gle/kn7hpCN1nixU4J599' target='_blank'>https://forms.gle/kn7hpCN1nixU4J599</a><br>
-        📧 문의 : JH.Moon213@gmail.com
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+render_footer()
