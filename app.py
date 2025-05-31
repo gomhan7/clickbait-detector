@@ -37,34 +37,37 @@ def load_model_and_vectorizer():
 model, vectorizer = load_model_and_vectorizer()
 
 # 구글 뉴스 변환
-def resolve_redirect_url(url):
+import requests
+from bs4 import BeautifulSoup
+
+def resolve_redirect_url(google_news_url):
     try:
-        # 구글 뉴스 URL이라면 직접 HTML 요청해서 meta-refresh 태그 분석
         headers = {
             "User-Agent": "Mozilla/5.0"
         }
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(google_news_url, headers=headers, timeout=10)
+        response.raise_for_status()
+        
+        # HTML 파싱
         soup = BeautifulSoup(response.text, "html.parser")
 
-        # 1. meta refresh 방식 리디렉션 추출
+        # 1. meta refresh 태그로 리디렉션 확인
         meta = soup.find("meta", attrs={"http-equiv": "refresh"})
-        if meta:
-            content = meta.get("content")
-            if "url=" in content.lower():
-                real_url = content.split("url=")[-1]
-                return real_url.strip()
+        if meta and "url=" in meta.get("content", "").lower():
+            redirect_url = meta["content"].split("url=")[-1].strip()
+            return redirect_url
 
-        # 2. fallback: HTML 내 링크 직접 추출
-        links = soup.find_all("a", href=True)
-        for a in links:
+        # 2. HTML 내 <a href> 중 외부 뉴스 링크 추출 (예비 방법)
+        for a in soup.find_all("a", href=True):
             href = a["href"]
-            if href.startswith("https://") and "google.com" not in href:
+            if href.startswith("http") and "google.com" not in href:
                 return href
 
+        return None
+
     except Exception as e:
-        print(f"🔧 리디렉션 URL 파싱 실패: {e}")
-    
-    return None
+        print(f"[에러] 리디렉션 파싱 실패: {e}")
+        return None
     
 # --- 뉴스 링크에서 제목/본문/출처 추출 함수 ---
 def extract_info_from_url(url):
@@ -388,16 +391,17 @@ with col_btn2:
             if not link_input.strip():
                 st.warning("뉴스 기사 링크를 입력해주세요. 비어있습니다.")
                 st.stop()
+            # 구글글
             
-                # 🔄 Google 뉴스 링크일 경우 실제 뉴스 URL로 변환 시도
             if "news.google.com" in link_input:
                 resolved_url = resolve_redirect_url(link_input)
                 if resolved_url:
                     st.info(f"🔄 Google 뉴스 링크가 실제 뉴스 링크로 변환되었습니다:\n\n{resolved_url}")
-                    link_input = resolved_url
+                    link_input = resolved_url  # 변환된 실제 뉴스 URL로 교체
                 else:
                     st.error("❌ Google 뉴스 링크의 실제 뉴스 주소를 가져오지 못했습니다. 직접 뉴스 링크를 입력해주세요.")
                     st.stop()
+
 
 
 
