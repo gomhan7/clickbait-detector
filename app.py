@@ -249,12 +249,11 @@ with st.sidebar:
     """)
     st.markdown("---")
     st.caption("""
-    **문의** : JH.Moon213@gmail.com
-    """)
-    st.markdown("---")
-    st.caption("""
     본 사이트는 과학기술정보통신부의 재원으로 한국지능정보사회진흥원의 지원을 받아 구축된 "낚시성 기사 탐지 데이터"을 활용하여 제작되었습니다. 본 사이트에 활용된 데이터는 AI 허브에서 다운로드 받으실 수 있습니다.
     """)
+    st.markdown("---")
+    st.caption(" **문의** : JH.Moon213@gmail.com")
+  
 # 🎣 사이드바 추가 END
 
 # 📍 메인 콘텐츠 영역 START
