@@ -4,12 +4,6 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-st.markdown("""
-    <style>
-    footer {visibility: hidden;}
-    </style>
-""", unsafe_allow_html=True)
-
 # --- 설정 ---
 # 모델 및 벡터라이저 파일 경로 정의 (실제 경로에 맞게 수정해주세요)
 MODEL_PATH = "clickbait_model.pkl"
@@ -231,6 +225,14 @@ h2 {
 </style>
 """, unsafe_allow_html=True)
 # 🎨 커스텀 CSS 주입 END
+
+# 워터마크 제거
+st.markdown("""
+    <style>
+    footer {visibility: hidden;}
+    </style>
+""", unsafe_allow_html=True)
+
 
 # 🎣 사이드바 추가 START
 with st.sidebar:
