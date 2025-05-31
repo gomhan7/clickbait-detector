@@ -406,7 +406,9 @@ with col_btn2:
             if not text_to_analyze.strip():
                 st.warning("분석할 텍스트를 준비하는 데 실패했습니다. 다시 시도해주세요.")
                 st.stop()
-
+if not text_to_analyze.strip():
+    st.warning("❌ 분석할 텍스트가 없어 예측을 중단합니다.")
+    st.stop()
 # --- 모델 예측 ---
 with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
     X_vec = vectorizer.transform([text_to_analyze])
