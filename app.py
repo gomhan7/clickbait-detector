@@ -284,7 +284,7 @@ with col2: # 두 번째 컬럼에 입력 필드 배치
             height=100,
             key="title_only_input"
         )
-        accuracy_hint = "정확도: 보통 (제목만 사용)"
+        accuracy_hint = "정확도: 낮음 (제목만 사용)"
         text_to_analyze = title_input
 
     elif check_method == "② 제목 + 본문 입력":
@@ -299,7 +299,7 @@ with col2: # 두 번째 컬럼에 입력 필드 배치
             height=200,
             key="title_and_body_body_input"
         )
-        accuracy_hint = "정확도: 높음 (제목 + 본문 사용)"
+        accuracy_hint = "보통: 높음 (제목 + 본문 사용)"
 
     elif check_method == "③ 뉴스 기사 링크 입력":
         link_input = st.text_input(
@@ -388,7 +388,7 @@ with col_btn2:
 
         # --- 결과 출력 ---
         st.markdown("---")
-        st.header("📊 판별 결과" )
+        st.subheader("📊 판별 결과" )
         
         # 결과 메시지를 강조하고 이모지로 시각화
         if predicted_label == 1: # 모델이 낚시성(1)으로 예측한 경우
