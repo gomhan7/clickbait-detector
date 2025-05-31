@@ -360,6 +360,21 @@ with col_btn2:
             
             with st.spinner('🔗 링크에서 뉴스 정보 추출 중... (최대 10초)'):
                 title_extracted, body_extracted, source_extracted = extract_info_from_url(link_input)
+            # 텍스트 깨짐 감지 함수 정의
+            def is_garbled(text):
+                if not text or len(text.strip()) == 0:
+                    return True
+                korean = re.findall(r"[가-힣]", text)
+                english = re.findall(r"[a-zA-Z]", text)
+                digits = re.findall(r"[0-9]", text)
+                valid_ratio = (len(korean) + len(english) + len(digits)) / len(text)
+                return valid_ratio < 0.2
+
+            # 깨짐 여부 검사
+            if is_garbled(title_extracted) or is_garbled(body_extracted):
+                st.warning("❌ 제목 또는 본문을 정상적으로 추출하지 못했습니다.")
+                st.info("👉 **‘제목만 입력’ 또는 ‘제목 + 본문 입력’ 기능을 이용해 주세요.**")
+                st.stop()
             
             if not title_extracted and not body_extracted:
                 st.error("❌ 링크에서 내용을 불러오지 못했습니다. 링크를 다시 확인하거나 다른 링크를 시도해주세요.")
