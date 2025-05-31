@@ -16,10 +16,11 @@ st.set_page_config(page_title="낚시성 뉴스 판별기", page_icon="🎣", la
 hide_st_style = """
     <style>
     #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
+    header {visibility: hidden;}
     </style>
 """
 st.markdown(hide_st_style, unsafe_allow_html=True)
+
 
 # --- 모델 및 벡터라이저 로딩 ---
 @st.cache_resource
