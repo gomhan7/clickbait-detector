@@ -427,7 +427,7 @@ with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
 
     # ✅ 이 안쪽에서 percent_clickbait 사용 가능!
     st.markdown("---")
-    st.subheader("📊 판별 결1과")
+    st.subheader("📊 판별 결과")
     st.markdown("<br>", unsafe_allow_html=True)
 
     if percent_clickbait > 60:
