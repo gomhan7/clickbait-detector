@@ -457,5 +457,13 @@ with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
 
 
 st.markdown("---")
-st.markdown("만족도 조사 : https://forms.gle/kn7hpCN1nixU4J599")
-st.markdown("문의 : JH.Moon213@gmail.com")
+st.markdown("---")
+st.markdown(
+    """
+    <div style='text-align: center; font-size: 0.9em; color: gray;'>
+        📝 만족도 조사 : <a href='https://forms.gle/kn7hpCN1nixU4J599' target='_blank'>https://forms.gle/kn7hpCN1nixU4J599</a><br>
+        📧 문의 : JH.Moon213@gmail.com
+    </div>
+    """,
+    unsafe_allow_html=True
+)
