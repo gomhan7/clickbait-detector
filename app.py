@@ -6,8 +6,8 @@ import re
 
 # --- 설정 ---
 # 모델 및 벡터라이저 파일 경로 정의 (실제 경로에 맞게 수정해주세요)
-model = joblib.load("clickbait_model.pkl")
-vectorizer = joblib.load("tfidf_vectorizer.pkl")
+MODEL_PATH = joblib.load("clickbait_model.pkl")
+VEC_PATH = joblib.load("tfidf_vectorizer.pkl")
 
 # --- Streamlit 페이지 설정 (스크립트의 첫 번째 Streamlit 명령이어야 함!) ---
 st.set_page_config(page_title="낚시성 뉴스 판별기", page_icon="🎣", layout="centered")
