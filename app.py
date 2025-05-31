@@ -12,6 +12,16 @@ VEC_PATH = "tfidf_vectorizer.pkl"
 # --- Streamlit 페이지 설정 (스크립트의 첫 번째 Streamlit 명령이어야 함!) ---
 st.set_page_config(page_title="낚시성 뉴스 판별기", page_icon="🎣", layout="centered")
 
+# 워터마크 제거
+hide_st_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    </style>
+"""
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 # --- 모델 및 벡터라이저 로딩 ---
 @st.cache_resource
 def load_model_and_vectorizer():
@@ -225,14 +235,6 @@ h2 {
 </style>
 """, unsafe_allow_html=True)
 # 🎨 커스텀 CSS 주입 END
-
-# 워터마크 제거
-hide_footer_style = """
-    <style>
-    footer {visibility: hidden;}
-    </style>
-"""
-st.markdown(hide_footer_style, unsafe_allow_html=True)
 
 
 # 🎣 사이드바 추가 START
