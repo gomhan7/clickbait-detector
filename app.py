@@ -12,22 +12,6 @@ VEC_PATH = "tfidf_vectorizer.pkl"
 # --- Streamlit 페이지 설정 (스크립트의 첫 번째 Streamlit 명령이어야 함!) ---
 st.set_page_config(page_title="낚시성 뉴스 판별기", page_icon="🎣", layout="centered")
 
-#이미지
-st.markdown(
-    """
-    <style>
-    .header-img {
-        width: 100%;
-        max-height: 120px;
-        object-fit: cover;
-        margin-bottom: 10px;
-    }
-    </style>
-
-    <img class="header-img" src="logo.png">
-    """,
-    unsafe_allow_html=True
-)
 
 # --- 모델 및 벡터라이저 로딩 ---
 @st.cache_resource
@@ -251,7 +235,7 @@ with st.sidebar:
     st.write("**개발자:** GOMHAN") # 여기에 귀하의 정보 추가
     st.write("**버전:** 1.0.1")
     st.markdown("---")
-    st.subheader("✔️추천 검사 방식")
+    st.subheader("✔️ 추천 검사 방식")
     st.write("""
     **다음 순서에 따라 검사 정확도가 달라집니다**
     1. 뉴스 기사 링크 입력
@@ -439,9 +423,9 @@ st.markdown("---")
 st.markdown(
     """
     <div style="display: flex; align-items: center;">
-        <span>문의 : </span>
+        <span></span>
         <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" 
-             width="18" style="margin-left: 10px;" /> JH.Moon213@gmail.com
+             width="18" style="margin-left: 10px;" /> 문의 : JH.Moon213@gmail.com           <img src="img/logo.png" width="20">
     </div>
     """,
     unsafe_allow_html=True
