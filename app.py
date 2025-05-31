@@ -267,7 +267,7 @@ with col1: # 첫 번째 컬럼에 검사 방식 선택 배치
         index=0, # 기본값은 "제목만 입력"
         key="check_method_radio"
     )
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
 with col2: # 두 번째 컬럼에 입력 필드 배치
     st.subheader("② 정보 입력")
@@ -390,7 +390,7 @@ with col_btn2:
         # --- 결과 출력 ---
         st.markdown("---")
         st.subheader("📊 판별 결과" )
-        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
         # 결과 메시지를 강조하고 이모지로 시각화
         if predicted_label == 1: # 모델이 낚시성(1)으로 예측한 경우
             st.markdown(
@@ -398,10 +398,13 @@ with col_btn2:
             unsafe_allow_html=True
             )
             st.error("❗ **높은 확률로 독자의 클릭을 유도하는 요소를 포함하고 있습니다.**")
+            st.markdown("<br>", unsafe_allow_html=True)
             if percent_clickbait > 70:
                 st.caption("주의! 자극적인 표현이나 과장된 내용이 있을 수 있습니다.")
+                st.markdown("<br>", unsafe_allow_html=True)
             else:
                 st.caption("낚시성으로 예측되었으나 확률은 다소 낮습니다. (모델의 판단)")
+                st.markdown("<br>", unsafe_allow_html=True)
         elif predicted_label == 0: # 모델이 정상(0)으로 예측한 경우
             st.markdown(f"## ✅ 이 뉴스는 **정상 뉴스**일 확률이 `{100 - percent_clickbait}%` 입니다.")
             st.success("👍 **낚시성 특징이 거의 없는 일반적인 뉴스입니다.**")
