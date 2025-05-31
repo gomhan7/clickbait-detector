@@ -419,18 +419,3 @@ with col_btn2:
 
 st.markdown("---")
 
-import streamlit as st
-
-st.markdown("---")
-
-st.markdown(
-    """
-    <div style="display: flex; align-items: center;">
-        <span>문ㅓ의 : JH.Moon213@gmail.com</span>
-        <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" 
-             width="18" style="margin-left: 10px;" />
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
