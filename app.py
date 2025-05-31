@@ -411,4 +411,4 @@ with col_btn2:
         st.info(accuracy_hint) # 정확도 힌트도 여기에 표시
 
 st.markdown("---")
-st.markdown("궁금한 점이 있다면 언제든지 질문해주세요!")
+st.markdown("**문의** : JH.Moon213@gmail.com")
