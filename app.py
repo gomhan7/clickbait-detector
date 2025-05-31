@@ -429,16 +429,4 @@ with col_btn2:
         st.info(accuracy_hint) # 정확도 힌트도 여기에 표시
 
 st.markdown("---")
-
-
-st.markdown(
-    """
-    <div style="display: flex; align-items: center;">
-        <span></span>
-        <img src="https://img.icons8.com/ios-glyphs/30/000000/new-post.png" 
-             width="18" style="margin-left: 10px;" /> 문의 : JH.Moon213@gmail.com>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
+st.markdown("문의 : JH.Moon213@gmail.com")
