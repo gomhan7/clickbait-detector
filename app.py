@@ -227,11 +227,12 @@ h2 {
 # 🎨 커스텀 CSS 주입 END
 
 # 워터마크 제거
-st.markdown("""
+hide_footer_style = """
     <style>
     footer {visibility: hidden;}
     </style>
-""", unsafe_allow_html=True)
+"""
+st.markdown(hide_footer_style, unsafe_allow_html=True)
 
 
 # 🎣 사이드바 추가 START
