@@ -4,7 +4,6 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-
 hide_footer_style = """
     <style>
     footer {visibility: hidden;}
