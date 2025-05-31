@@ -354,12 +354,14 @@ with col_btn2:
         if check_method == "① 제목만 입력":
             if not title_input.strip():
                 st.warning("제목을 입력해주세요. 비어있습니다.")
+                render_footer()
                 st.stop()
             text_to_analyze = title_input
 
         elif check_method == "② 제목 + 본문 입력":
             if not title_input.strip() and not body_input.strip():
                 st.warning("제목과 본문 중 하나라도 입력해주세요.")
+                render_footer()
                 st.stop()
             
             if title_input.strip() and not body_input.strip():
@@ -375,12 +377,14 @@ with col_btn2:
         elif check_method == "③ 뉴스 기사 링크 입력":
             if not link_input.strip():
                 st.warning("뉴스 기사 링크를 입력해주세요. 비어있습니다.")
+                render_footer()
                 st.stop()
             # 구글
             
             if "google.com" in link_input and ("read" in link_input or "/amp/" in link_input):
                 st.warning("❌ Google 뉴스 링크는 외부 기사의 중간 매개체 역할을 하므로 실제 뉴스 내용을 직접 가져올 수 없습니다.")
                 st.info("🔗 아래 방법을 따라주세요:\n1. Google 뉴스 링크를 인터넷에서 직접들어간다.\n2. 상단 주소창에 표시된 **실제 뉴스 기사 링크**를 복사한다.\n3. 복사한 링크를 다시 이곳에 붙여넣는다.")
+                render_footer()
                 st.stop()
             
             with st.spinner('🔗 링크에서 뉴스 정보 추출 중... (최대 10초)'):
@@ -399,13 +403,16 @@ with col_btn2:
             if is_garbled(title_extracted) or is_garbled(body_extracted):
                 st.warning("❌ 제목 또는 본문을 정상적으로 추출하지 못했습니다.")
                 st.info("👉 **‘제목만 입력’ 또는 ‘제목 + 본문 입력’ 기능을 이용해 주세요.**")
+                render_footer()
                 st.stop()
             
             if not title_extracted and not body_extracted:
                 st.error("❌ 링크에서 내용을 불러오지 못했습니다. 링크를 다시 확인하거나 다른 링크를 시도해주세요.")
+                render_footer()
                 st.stop()
             elif title_extracted == "제목 없음" and body_extracted == "본문 없음":
                 st.error("⚠️ 링크에서 유효한 제목과 본문을 찾을 수 없습니다. 뉴스 기사가 맞는지 확인해주세요.")
+                render_footer()
                 st.stop()
             else:
                 text_to_analyze = f"{title_extracted} {body_extracted} {source_extracted}"
@@ -420,9 +427,11 @@ with col_btn2:
             # 최종 분석할 텍스트가 비어있다면 오류 처리
             if not text_to_analyze.strip():
                 st.warning("분석할 텍스트를 준비하는 데 실패했습니다. 다시 시도해주세요.")
+                render_footer()
                 st.stop()
 if not text_to_analyze.strip():
     st.warning("❌ 분석할 텍스트가 없어 예측을 중단합니다.")
+    render_footer()
     st.stop()
 # --- 모델 예측 ---
 with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
@@ -436,6 +445,7 @@ with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
         percent_clickbait = round(prob_clickbait * 100, 2)
     except ValueError:
         st.error("오류: 모델 클래스에 낚시성/정상 라벨(0 또는 1)이 정의되어 있지 않습니다. 모델 학습을 확인하세요.")
+        render_footer()
         st.stop()
 
     predicted_label = model.predict(X_vec)[0]
