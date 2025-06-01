@@ -39,6 +39,18 @@ def load_model_and_vectorizer():
 # 앱 시작 시 모델과 벡터라이저를 로드합니다.
 model, vectorizer = load_model_and_vectorizer()
 
+
+#서버 로그 기록
+def log_to_google_sheets(method, input_text, result, score):
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("versatile-field-388308-415f508145d4.json", scope)
+    client = gspread.authorize(creds)
+
+    sheet = client.open("StreamlitLogs").sheet1  # 시트 이름
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    sheet.append_row([timestamp, method, input_text[:100], result, score])
+    
 # 하단 안내를 함수로 분리
 def render_footer():
     st.markdown("---")
@@ -480,5 +492,12 @@ with st.spinner("🧠 모델이 낚시성 여부를 분석 중입니다..."):
 
     st.info(accuracy_hint)
 
+    # ✅ Google Sheets 로그 저장
+    log_to_google_sheets(
+        method=check_method,
+        input_text=text_to_analyze,
+        result="Clickbait" if predicted_label == 1 else "Normal",
+        score=percent_clickbait
+    )
 
 render_footer()
