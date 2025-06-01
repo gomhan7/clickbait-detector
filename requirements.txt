@@ -4,3 +4,5 @@ pandas
 numpy
 beautifulsoup4
 lxml
+gspread
+oauth2client
