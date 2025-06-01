@@ -69,7 +69,12 @@ def log_to_google_sheets(method, input_text, result, score):
 
 # 하단 안내를 함수로 분리
 def render_footer():
-    st.markdown("---")
+    st.markdown(
+    """
+    <hr style='margin-top: 10px; margin-bottom: 10px; border: none; height: 1px; background-color: #ccc;' />
+    """,
+    unsafe_allow_html=True
+)
     st.markdown(
     """
     <div style='text-align: center'>
@@ -222,7 +227,12 @@ st.markdown("""
 """)
 
 
-st.markdown("---") # 여기에 첫 번째 구분선이 있습니다.
+st.markdown(
+    """
+    <hr style='margin-top: 10px; margin-bottom: 10px; border: none; height: 30px; background-color: #ccc;' />
+    """,
+    unsafe_allow_html=True
+) # 여기에 첫 번째 구분선이 있습니다.
 
 # 🎨 커스텀 CSS 주입 START
 st.markdown("""
