@@ -4,6 +4,8 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import urllib.parse
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 # --- 설정 ---
 # 모델 및 벡터라이저 파일 경로 정의 (실제 경로에 맞게 수정해주세요)
@@ -43,11 +45,13 @@ model, vectorizer = load_model_and_vectorizer()
 #서버 로그 기록
 def log_to_google_sheets(method, input_text, result, score):
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("streamlit-log-project-30dff5c26178.json", scope)
+
+    # secrets.toml을 통한 인증
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["google_sheets"], scope)
     client = gspread.authorize(creds)
 
     sheet = client.open("StreamlitLogs").sheet1  # 시트 이름
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    sheet.append_row([str(datetime.now()), method, input_text[:1000], result, f"{score}%"])
 
     sheet.append_row([timestamp, method, input_text[:100], result, score])
     
