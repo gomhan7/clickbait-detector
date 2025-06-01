@@ -75,14 +75,7 @@ def render_footer():
     """,
     unsafe_allow_html=True
 )
-    st.markdown(
-    """
-    <div style='text-align: center'>
-        <img src="https://i.imgur.com/VWthizR.png" width="40" />
-    </div>
-    """,
-    unsafe_allow_html=True
-    )
+    
     st.markdown(
         """
         <div style='text-align: center; font-size: 0.9em; color: gray;'>
@@ -92,7 +85,14 @@ def render_footer():
         """,
         unsafe_allow_html=True
     )
-    
+    st.markdown(
+    """
+    <div style='text-align: center'>
+        <img src="https://i.imgur.com/VWthizR.png" width="40" />
+    </div>
+    """,
+    unsafe_allow_html=True
+    )
     
 # --- 뉴스 링크에서 제목/본문/출처 추출 함수 ---
 def extract_info_from_url(url):
