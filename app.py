@@ -6,6 +6,7 @@ import re
 import urllib.parse
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from datetime import datetime
 
 # --- 설정 ---
 # 모델 및 벡터라이저 파일 경로 정의 (실제 경로에 맞게 수정해주세요)
@@ -199,8 +200,17 @@ st.markdown("""
     뉴스 제목, 본문 또는 기사 링크를 입력하면
     자체 학습한 AI가 뉴스의 낚시성 정도를 분석해드립니다. 가짜 뉴스 판별기가 아닌 낚시성 뉴스 판별기로 본문과 다르거나 과장, 거짓된 기사를 판별하며 판별 결과가 정확하지 않을 수 있습니다.
 """)
+# Google Sheets 인증 설정
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["google_sheets"], scope)
+client = gspread.authorize(creds)
+
+# 인증된 이메일 확인 (디버깅용)
 st.write("⛏ 인증된 이메일:", creds.service_account_email)
-st.write("✅ 구글 시트 접속 성공")
+
+# Google Sheets 열기
+sheet = client.open("StreamlitLogs").worksheet("시트1")  # 시트 이름이 '시트1'인지 확인
+sheet.append_row([str(datetime.now()), "method", "input", "result", "score"])
 
 st.markdown("---") # 여기에 첫 번째 구분선이 있습니다.
 
