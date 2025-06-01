@@ -43,7 +43,7 @@ model, vectorizer = load_model_and_vectorizer()
 #서버 로그 기록
 def log_to_google_sheets(method, input_text, result, score):
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("versatile-field-388308-415f508145d4.json", scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name("streamlit-log-project-30dff5c26178.json", scope)
     client = gspread.authorize(creds)
 
     sheet = client.open("StreamlitLogs").sheet1  # 시트 이름
