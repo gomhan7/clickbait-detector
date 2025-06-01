@@ -211,7 +211,12 @@ st.markdown("""
     뉴스 제목, 본문 또는 기사 링크를 입력하면
     자체 학습한 AI가 뉴스의 낚시성 정도를 분석해드립니다. 가짜 뉴스 판별기가 아닌 낚시성 뉴스 판별기로 본문과 다르거나 과장, 거짓된 기사를 판별하며 판별 결과가 정확하지 않을 수 있습니다.
 """)
-
+try:
+    sheet = client.open("StreamlitLogs").sheet1
+    st.success("✅ 시트 접근 성공!")
+except Exception as e:
+    st.error(f"❌ 시트 접근 실패: {e}")
+    
 st.markdown("---") # 여기에 첫 번째 구분선이 있습니다.
 
 # 🎨 커스텀 CSS 주입 START
