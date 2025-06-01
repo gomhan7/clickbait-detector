@@ -71,7 +71,7 @@ def log_to_google_sheets(method, input_text, result, score):
 def render_footer():
     st.markdown(
     """
-    <hr style='margin-top: 10px; margin-bottom: 10px; border: none; height: 1px; background-color: #ccc;' />
+    <hr style='margin-top: 20px; margin-bottom: 10px; border: none; height: 1px; background-color: #ccc;' />
     """,
     unsafe_allow_html=True
 )
@@ -229,7 +229,7 @@ st.markdown("""
 
 st.markdown(
     """
-    <hr style='margin-top: 10px; margin-bottom: 10px; border: none; height: 30px; background-color: #ccc;' />
+    <hr style='margin-top: 20px; margin-bottom: 10px; border: none; height: 1px; background-color: #ccc;' />
     """,
     unsafe_allow_html=True
 ) # 여기에 첫 번째 구분선이 있습니다.
