@@ -81,7 +81,7 @@ def render_footer():
     )
     st.markdown(
     """
-    <div style="display: flex; align-items: center;">
+    <div style='text-align: center'>
         <img src="https://i.imgur.com/VWthizR.png" width="40" />
     </div>
     """,
