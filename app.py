@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 import re
 import urllib.parse
+from google.oauth2.service_account import Credentials
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
@@ -43,18 +44,28 @@ def load_model_and_vectorizer():
 model, vectorizer = load_model_and_vectorizer()
 
 
-#서버 로그 기록
+# 서버 로그 기록
 def log_to_google_sheets(method, input_text, result, score):
-    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+    # 필요한 scope 명시
+    scope = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
 
     # secrets.toml을 통한 인증
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(st.secrets["google_sheets"], scope)
+    creds = Credentials.from_service_account_info(
+        st.secrets["google_sheets"], scopes=scope
+    )
     client = gspread.authorize(creds)
 
-    sheet = client.open("StreamlitLogs").sheet1  # 시트 이름
-    sheet.append_row([str(datetime.now()), method, input_text[:1000], result, f"{score}%"])
+    # 시트 열기
+    sheet = client.open("StreamlitLogs").sheet1
 
-    sheet.append_row([timestamp, method, input_text[:100], result, score])
+    # 현재 시간 기록
+    timestamp = str(datetime.now())
+
+    # 시트에 로그 추가
+    sheet.append_row([timestamp, method, input_text[:1000], result, f"{score}%"])
     
 # 하단 안내를 함수로 분리
 def render_footer():
