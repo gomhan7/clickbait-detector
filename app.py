@@ -75,6 +75,7 @@ def render_footer():
         <div style='text-align: center; font-size: 0.9em; color: gray;'>
             📝 만족도 조사 : <a href='https://forms.gle/kn7hpCN1nixU4J599' target='_blank'>https://forms.gle/kn7hpCN1nixU4J599</a><br>
             📧 문의 : JH.Moon213@gmail.com
+        <img src="https://i.imgur.com/VWthizR.png" width="40" style="margin-left: 10px;" />
         </div>
         """,
         unsafe_allow_html=True
