@@ -386,6 +386,7 @@ with col_btn2:
                 render_footer()
                 st.stop()
             text_to_analyze = title_input
+            accuracy_hint = "정확도: 낮음 (제목만 사용)"  # ✅ 추가
 
         elif check_method == "② 제목 + 본문 입력":
             if not title_input.strip() and not body_input.strip():
