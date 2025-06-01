@@ -66,29 +66,6 @@ def log_to_google_sheets(method, input_text, result, score):
     # 시트에 로그 추가
     sheet.append_row([timestamp, method, input_text[:1000], result, f"{score}%"])
 
-#구글 확인
-def test_google_sheet_access():
-    # 필요한 스코프 설정
-    scope = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
-
-    # secrets.toml에서 서비스 계정 정보 불러오기
-    creds = Credentials.from_service_account_info(
-        st.secrets["google_sheets"],
-        scopes=scope
-    )
-
-    # gspread 클라이언트 인증
-    client = gspread.authorize(creds)
-
-    # 테스트: 시트 열기 시도
-    try:
-        sheet = client.open("StreamlitLogs").sheet1  # 시트 이름 정확히 입력
-        st.success("✅ 구글 시트 접근 성공!")
-    except Exception as e:
-        st.error(f"❌ 시트 접근 실패: {e}")
 
 # 하단 안내를 함수로 분리
 def render_footer():
@@ -235,7 +212,6 @@ st.markdown("""
     자체 학습한 AI가 뉴스의 낚시성 정도를 분석해드립니다. 가짜 뉴스 판별기가 아닌 낚시성 뉴스 판별기로 본문과 다르거나 과장, 거짓된 기사를 판별하며 판별 결과가 정확하지 않을 수 있습니다.
 """)
 
-test_google_sheet_access()
 
 st.markdown("---") # 여기에 첫 번째 구분선이 있습니다.
 
