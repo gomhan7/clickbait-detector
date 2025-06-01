@@ -71,7 +71,7 @@ def log_to_google_sheets(method, input_text, result, score):
 def render_footer():
     st.markdown(
     """
-    <hr style='margin-top: 20px; margin-bottom: 10px; border: none; height: 1px; background-color: #ccc;' />
+    <hr style='margin-top: 20px; margin-bottom: 20px; border: none; height: 1px; background-color: #ccc;' />
     """,
     unsafe_allow_html=True
 )
