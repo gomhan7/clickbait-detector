@@ -452,6 +452,14 @@ with col_btn2:
                         st.write(body_extracted[:500] + "..." if len(body_extracted) > 500 else body_extracted)
                 else:
                     st.warning("⚠️ 본문 추출에 실패했습니다. 제목과 출처 정보만으로 분석합니다.")
+                if title_extracted and body_extracted:
+                        accuracy_hint = "정확도: 높음 (제목 + 본문 사용)"
+                elif title_extracted and not body_extracted:
+                        accuracy_hint = "정확도: 낮음 (제목만 사용)"
+                elif not title_extracted and body_extracted:
+                        accuracy_hint = "정확도: 보통 (본문만 사용)"
+                else:
+                        accuracy_hint = "정확도: 불명확 (정보 부족)"
 
             # 최종 분석할 텍스트가 비어있다면 오류 처리
             if not text_to_analyze.strip():
